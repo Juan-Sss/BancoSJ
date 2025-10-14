@@ -49,23 +49,58 @@ public class main {
         System.out.println("Ingrese el DNI de la persona: ");
         String Dni = entrada.nextLine();
         usuarios.add(Dni);
+        System.out.println("Ingrese su fecha de nacimiento: ");
+        String Fecha = entrada.nextLine();
+        usuarios.add(Fecha);
+        String genero = CheakGenero();
+        usuarios.add(genero);
 
     }
-    public static void ShowUser(ArrayList<String> usuarios){
-        for(String user:usuarios){
-            System.out.println(user);
+    public static void ShowUser(ArrayList<String> usuarios) {
+        if (usuarios.isEmpty()) {
+            System.out.println("\nNo hay usuarios registrados.\n");
+            return;
         }
+
+        System.out.println("\n======= LISTADO DE USUARIOS =======\n");
+
+        for (int i = 0; i < usuarios.size(); i += 4) {
+            System.out.println("Persona " + ((i / 4) + 1));
+            System.out.println("  Nombre:  " + usuarios.get(i));
+            System.out.println("  DNI:  " + usuarios.get(i + 1));
+            System.out.println("  Fecha de nacimiento:  " + usuarios.get(i + 2));
+            System.out.println("  Género:  " + usuarios.get(i + 3));
+            System.out.println("-----------------------------------");
+        }
+
+        System.out.println("========= FIN DEL LISTADO =========\n");
     }
     public static void pause(){
         Scanner pausa = new Scanner(System.in);
         System.out.println("Presione ENTER para continuar...");
         pausa.nextLine();
     }
-    public  static void SearchUser(ArrayList<String> usuarios){
+    public static void SearchUser(ArrayList<String> usuarios){
         ArrayList<String> wanted = new ArrayList<String>();
         Scanner entrada =  new Scanner(System.in);
         System.out.print("Ingrese el nombre de la persona: ");
-        String busqueda = entrada.nextline();
+        String busqueda = entrada.nextLine();
+
+    }
+    public static String CheakGenero(){
+        Scanner entrada = new Scanner(System.in);
+        System.out.print("Ingrese el genero (M) and (F): ");
+        String genero = entrada.nextLine();
+        while(!genero.equalsIgnoreCase("F") && !genero.equalsIgnoreCase("M")){
+            System.out.print("Genero incorrecto, ingrese M o F: ");
+            genero = entrada.nextLine();
+        }
+        return genero;
+
+    }
+    public static void FechaNAC(){
+        Scanner entrada = new Scanner(System.in);
+
 
     }
 }
