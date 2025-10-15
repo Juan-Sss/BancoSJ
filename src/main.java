@@ -28,7 +28,8 @@ public class main {
                 ShowUser(usuarios);
                 pause();
             } else if (opcion==3) {
-                System.out.println("Modificando");
+                UpdateUser(usuarios);
+                pause();
             }else if (opcion==4){
                 DeleteUser(usuarios);
                 pause();
@@ -124,7 +125,6 @@ public class main {
         System.out.print("¿Está seguro que desea borrar este usuario? (S/N): ");
         String confirm = entrada.nextLine();
         if (confirm.equalsIgnoreCase("S")) {
-            // borrar las 4 posiciones (en orden inverso para que no se muevan los índices)
             for (int i = 3; i >= 0; i--) {
                 usuarios.remove(base + i);
             }
@@ -132,5 +132,62 @@ public class main {
         } else {
             System.out.println("Operación cancelada.");
         }
+    }
+    public static void UpdateUser(ArrayList<String> usuarios) {
+
+        Scanner entrada = new Scanner(System.in);
+        System.out.print("Ingrese el DNI del usuario: ");
+        String busqueda = entrada.nextLine();
+        int index = usuarios.indexOf(busqueda);
+        if (index == -1) {
+            System.out.println("Usuario no encontrado.");
+        }else {
+            int inicio = (index / 4) * 4;
+            System.out.println("¿Qué dato desea modificar?");
+            System.out.println("1. Nombre y Apellido");
+            System.out.println("2. DNI");
+            System.out.println("3. Fecha de Nacimiento");
+            System.out.println("4. Género");
+
+            System.out.print("Opción: ");
+            int opcion = entrada.nextInt();
+            entrada.nextLine(); // limpiar buffer
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Nuevo Nombre y Apellido: ");
+                    String nuevoNombre = entrada.nextLine();
+                    usuarios.set(inicio, nuevoNombre);
+                    break;
+
+                case 2:
+                    System.out.print("Nuevo DNI: ");
+                    String nuevoDni = entrada.nextLine();
+                    usuarios.set(inicio + 1, nuevoDni);
+                    break;
+
+                case 3:
+                    System.out.print("Nueva Fecha de Nacimiento: ");
+                    String nuevaFecha = entrada.nextLine();
+                    usuarios.set(inicio + 2, nuevaFecha);
+                    break;
+
+                case 4:
+                    System.out.print("Nuevo Género: ");
+                    String nuevoGenero = entrada.nextLine();
+                    usuarios.set(inicio + 3, nuevoGenero);
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
+                    break;
+            }
+
+            System.out.println("✅ Datos actualizados correctamente.");
+
+
+
+        }
+
     }
 }
