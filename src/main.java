@@ -30,7 +30,8 @@ public class main {
             } else if (opcion==3) {
                 System.out.println("Modificando");
             }else if (opcion==4){
-                System.out.println("Borrando");
+                DeleteUser(usuarios);
+                pause();
             } else if (opcion==0) {
                 System.out.println("Saliendo...");
             }else{
@@ -98,9 +99,38 @@ public class main {
         return genero;
 
     }
-    public static void FechaNAC(){
+    public static void DeleteUser(ArrayList<String> usuarios){
+        if (usuarios.isEmpty()) {
+            System.out.println("No hay usuarios para borrar.");
+            return;
+        }
+
         Scanner entrada = new Scanner(System.in);
+        System.out.print("Ingrese el DNI del usuario a eliminar: ");
+        String dniBuscado = entrada.nextLine();
 
+        int index = usuarios.indexOf(dniBuscado);
+        if (index == -1) {
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
 
+        int base = (index / 4) * 4;
+
+        System.out.println("Eliminando al usuario:");
+        System.out.println("Nombre: " + usuarios.get(base));
+        System.out.println("DNI: " + usuarios.get(base + 1));
+
+        System.out.print("¿Está seguro que desea borrar este usuario? (S/N): ");
+        String confirm = entrada.nextLine();
+        if (confirm.equalsIgnoreCase("S")) {
+            // borrar las 4 posiciones (en orden inverso para que no se muevan los índices)
+            for (int i = 3; i >= 0; i--) {
+                usuarios.remove(base + i);
+            }
+            System.out.println("Usuario eliminado correctamente.");
+        } else {
+            System.out.println("Operación cancelada.");
+        }
     }
 }
