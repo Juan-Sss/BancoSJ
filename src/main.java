@@ -6,7 +6,7 @@ public class main {
     public static void main(String[] args){
         Scanner entrada = new Scanner(System.in);
         int opcion = -1;
-        ArrayList<Usuario> userslist = new ArrayList<Usuario>();
+        ArrayList<Usuario> userslist = new ArrayList<>();
         SeedUsers(userslist);
         while(opcion != 0){
 
