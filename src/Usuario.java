@@ -51,7 +51,7 @@ public class Usuario {
         return mail;
     }
 
-    //SETTERS
+    //SETTERS entradas de datos
 
 
     public void setDireccion(String direccion) {

@@ -30,10 +30,10 @@ public class main {
             } else if (opcion==3) {
                 UpdateUser(userslist);
                 pause();
-            }/*else if (opcion==4){
-                DeleteUser(usuarios);
+            }else if (opcion==4){
+                DeleteUser(userslist);
                 pause();
-            }*/ else if(opcion==5){
+            } else if(opcion==5){
                 SearchUser(userslist);
                 pause();
             } else if (opcion==0) {
@@ -135,37 +135,28 @@ public class main {
         return genero;
 
     }
-    public static void DeleteUser(ArrayList<String> usuarios){
-        if (usuarios.isEmpty()) {
+
+    public static void DeleteUser(ArrayList<Usuario> userlist){
+        if (userlist.isEmpty()) {
             System.out.println("No hay usuarios para borrar.");
             return;
         }
 
         Scanner entrada = new Scanner(System.in);
         System.out.print("Ingrese el DNI del usuario a eliminar: ");
-        String dniBuscado = entrada.nextLine();
+        int dniBuscado = entrada.nextInt();
+        Usuario buscado=null;
 
-        int index = usuarios.indexOf(dniBuscado);
-        if (index == -1) {
-            System.out.println("Usuario no encontrado.");
-            return;
-        }
-
-        int base = (index / 4) * 4;
-
-        System.out.println("Eliminando al usuario:");
-        System.out.println("Nombre: " + usuarios.get(base));
-        System.out.println("DNI: " + usuarios.get(base + 1));
-
-        System.out.print("¿Está seguro que desea borrar este usuario? (S/N): ");
-        String confirm = entrada.nextLine();
-        if (confirm.equalsIgnoreCase("S")) {
-            for (int i = 3; i >= 0; i--) {
-                usuarios.remove(base + i);
+        for(Usuario u:userlist){
+            if(u.getDocumento()==dniBuscado){
+                buscado = u;
             }
-            System.out.println("Usuario eliminado correctamente.");
-        } else {
-            System.out.println("Operación cancelada.");
+        }
+        if(buscado!=null){
+            userlist.remove(buscado);
+            System.out.println("Usuario eliminado:" + buscado.getNombre() + " " + buscado.getApellido());
+        }else{
+            System.out.println("Usuario no encontrado");
         }
     }
     public static void UpdateUser(ArrayList<Usuario> usuarios) {
